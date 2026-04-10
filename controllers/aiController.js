@@ -1,13 +1,14 @@
 import OpenAI from "openai";
 import 'dotenv/config';
-import sql from "../configs/db";
+import sql from "../configs/db.js";
 import { clerkClient } from "@clerk/express";
+
+
 
 const AI = new OpenAI({
     apiKey: process.env.GEMINI_API_KEY,
     baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
 });
-
 
 export const generateArticle = async (req, res) => {
     try {
@@ -25,9 +26,9 @@ export const generateArticle = async (req, res) => {
             messages: [
                 {
                     role: "user",
-                    content: "prompt",
+                    content: prompt,
                 },
-            ],
+            ],    
             temperature: 0.7,
             max_tokens: length,
 
